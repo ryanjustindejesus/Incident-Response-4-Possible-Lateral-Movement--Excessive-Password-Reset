@@ -22,17 +22,17 @@
 ![image](https://github.com/user-attachments/assets/9e29d727-127b-4200-a292-e0786ddaa4bf)
 - <b>Click activity log and observe the activity log</b>
 
-![image](https://github.com/user-attachments/assets/7faf20bd-4b4f-4a95-b7f2-696fd2ca9cd6)
-- <b>Click investigation on the bottom left</b>
+![image](https://github.com/user-attachments/assets/aa7d9edd-7758-454c-8eb1-5263ad7a35f0)
+- <b>Click the IP Address and observe the geolocation information</b>
 
-![image](https://github.com/user-attachments/assets/7d510b8c-b1cb-4d78-adfc-42e99432f910)
+![image](https://github.com/user-attachments/assets/4b383e24-b8de-4a23-8f42-48ca76a12541)
 - <b>Investigate and determine the scope</b>
 
-![image](https://github.com/user-attachments/assets/568cc113-e50b-4478-be0a-8dcc34ab49b0)
+![image](https://github.com/user-attachments/assets/1f4d1ef8-4c71-4cd7-a793-ec64cfc9fa13)
 - <b>Click the IP Address and observe the related event</b>
-- <b>This specific incident is related to 42+ events</b>
+- <b>This specific incident is related to 11+ events</b>
 
-![image](https://github.com/user-attachments/assets/f7613b7a-0de2-4afa-989f-a61df32023ae)
+![image](https://github.com/user-attachments/assets/1e18bc35-099b-454b-bc99-ca9417c8398e)
 - <b>More Information is presented in the Log Analytics Workspace from this query:</b>
 
 ``` 
@@ -45,20 +45,17 @@ let GetIPRelatedAlerts = (v_IP_Address: string) {
     | where entity['Type'] == 'ip' and entity['Address'] =~ v_IP_Address
     | project-away entity
 };
-GetIPRelatedAlerts(@'183.81.169.238')
+GetIPRelatedAlerts(@'13.93.155.8')
 ```
-
-![image](https://github.com/user-attachments/assets/734e9966-a58c-48dd-b83e-4ef855bdd29e)
-- <b>Determine the legitimacy of the Incident (True Positive, False Positive, etc.)</b>
 
 ```
 SecurityEvent
 | where EventID == 4625
-| where IpAddress == '183.81.169.238'
+| where IpAddress == '13.93.155.8'
 ```
  
-![image](https://github.com/user-attachments/assets/ebe15060-692a-47c0-be5e-7e9d389ee438)
-- <b>Based on the results, I will conclude this as a True Positive - Suspicious Activity due the results containing multiple failed authentication attempts by the same user account or from the same IP address, further suggesting malicious intent.
+![image](https://github.com/user-attachments/assets/399fa37f-d5d9-4108-b80f-4d43a8dff8ea)
+- <b>Based on the results, I will conclude this as a True Positive - Suspicious Activity due to the results containing multiple failed authentication attempts by the same user account or from the same IP address, further suggesting malicious intent.
 
 ## Incident Management Playbook 
 - <b>Incident Description</b>
@@ -74,6 +71,9 @@ SecurityEvent
         - What type of account was it? Permissions?
 
 - <b>Containment and Recovery</b>
-    - Lock down the NSG assigned to that VM/Subnet, either entirely, or to allow only necessary traffic
-    - Reset the affected user’s password
-    - Enable MFA
+
+![image](https://github.com/user-attachments/assets/86ee1b28-092f-4490-b5b1-c0bc58562da9)
+- <b>Lock down the NSG assigned to that VM/Subnet, either entirely, or to allow only necessary traffic</b>
+
+![image](https://github.com/user-attachments/assets/0f43e8a9-e329-405e-9467-d57dbbd165ab)
+- <b>Reset the affected user’s password</b>
