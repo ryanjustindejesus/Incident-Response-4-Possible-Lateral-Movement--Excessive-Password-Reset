@@ -1,4 +1,4 @@
-<h1>Incident Response: Brute Force Attempt - Linux</h1>
+<h1>Incident Response: Possible Lateral Movement - Excessive Password Reset</h1>
 
 - <b>This tutorial outlines the configuration of performing incident response for excessive password reset using Microsoft Sentinel and Log Analytics Workspace</b>
 
